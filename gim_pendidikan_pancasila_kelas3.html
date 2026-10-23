@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#1746a2">
+<title>Petualangan Norma dan Aturan — Pendidikan Pancasila Kelas 3</title>
+<style>
+:root{--blue:#1746a2;--blue2:#2f6fed;--ink:#17223b;--muted:#5c6882;--paper:#fff;--bg:#edf3ff;--green:#13845b;--red:#c43b4d;--gold:#ffca55}
+*{box-sizing:border-box}
+body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);background:radial-gradient(circle at top left,#d9e8ff,transparent 38%),linear-gradient(135deg,#f5f8ff,#e8f0ff);min-height:100vh}
+button,input{font:inherit}
+button{cursor:pointer;border:0;border-radius:14px;padding:12px 18px;font-weight:800;transition:transform .15s,filter .15s}
+button:hover{filter:brightness(1.04);transform:translateY(-1px)}
+button:focus-visible,input:focus-visible{outline:3px solid #ffbf47;outline-offset:3px}
+.primary{background:var(--blue);color:#fff;box-shadow:0 5px 0 #0d2d72}
+.secondary{background:#e8efff;color:var(--blue)}
+.ghost{background:transparent;color:var(--blue);border:2px solid #cfdbf7}
+.wrap{max-width:1050px;margin:auto;padding:18px}
+header{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:6px 0 18px}
+.brand{display:flex;align-items:center;gap:12px}
+.logo{display:grid;place-items:center;width:52px;height:52px;border-radius:17px;background:var(--blue);color:#fff;font-size:28px;box-shadow:0 5px 0 #0d2d72}
+h1{font-size:clamp(1.35rem,3vw,2rem);line-height:1.1;margin:0}
+.subtitle{margin:5px 0 0;color:var(--muted);font-size:.95rem}
+.top-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.panel{background:rgba(255,255,255,.94);border:1px solid #d9e4fb;border-radius:24px;padding:clamp(18px,4vw,32px);box-shadow:0 14px 35px #224a8b12}
+.hero{display:grid;grid-template-columns:1.2fr .8fr;gap:24px;align-items:center}
+.hero h2{font-size:clamp(1.7rem,4vw,2.7rem);margin:0 0 12px;line-height:1.1}
+.hero p{color:var(--muted);line-height:1.65}
+.hero-art{font-size:clamp(5rem,12vw,9rem);text-align:center;background:linear-gradient(145deg,#e7efff,#fff3cb);border-radius:26px;padding:24px;animation:float 3s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:20px 0}
+.field label{display:block;font-weight:800;margin-bottom:7px}
+.field input{width:100%;padding:13px 14px;border:2px solid #d7e2f8;border-radius:13px;background:#fbfdff;color:var(--ink)}
+.hint{font-size:.88rem;color:var(--muted)}
+.features{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:20px}
+.feature{padding:14px;border-radius:16px;background:#f3f6ff;border:1px solid #e0e8fb}
+.feature b{display:block;margin:5px 0}
+.feature span{font-size:1.45rem}
+.hidden{display:none!important}
+.game-head{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap}
+.level-chip{background:#e8efff;color:var(--blue);padding:8px 12px;border-radius:99px;font-weight:900}
+.score-chip{background:#fff2cf;color:#755000;padding:8px 12px;border-radius:99px;font-weight:900}
+.progress{height:10px;background:#e6edfb;border-radius:99px;overflow:hidden;margin:18px 0 24px}
+.progress>div{height:100%;width:0;background:linear-gradient(90deg,#2f6fed,#4bc89b);transition:width .35s}
+.level-title{font-size:1.4rem;margin:0}
+.question-meta{color:var(--muted);font-size:.92rem;margin:7px 0 18px}
+.question{font-size:clamp(1.15rem,2.6vw,1.55rem);font-weight:850;line-height:1.4;margin:0 0 18px}
+.options{display:grid;gap:11px}
+.option{width:100%;text-align:left;background:#f7f9ff;color:var(--ink);border:2px solid #dce5f8;padding:15px;border-radius:16px;display:flex;gap:12px;align-items:flex-start;box-shadow:none}
+.option .letter{display:grid;place-items:center;flex:0 0 30px;height:30px;background:#e2eaff;color:var(--blue);border-radius:9px;font-weight:900}
+.option.correct{border-color:#3cb88b;background:#e9fff5}
+.option.wrong{border-color:#e96b7a;background:#fff0f2}
+.option:disabled{cursor:default;transform:none}
+.feedback{margin-top:16px;padding:15px 17px;border-radius:15px;line-height:1.55;animation:pop .25s ease}
+.feedback.good{background:#e7fff4;color:#075c3d;border:1px solid #a6ebcd}
+.feedback.bad{background:#fff0f2;color:#8b1e2b;border:1px solid #f3b5be}
+@keyframes pop{from{opacity:0;transform:scale(.98)}to{opacity:1;transform:scale(1)}}
+.game-footer{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:22px;flex-wrap:wrap}
+.motivation{color:var(--muted);font-weight:700}
+.level-dots{display:flex;gap:7px;margin-top:18px}
+.dot{height:8px;flex:1;background:#e1e8f8;border-radius:20px}
+.dot.done{background:#31b783}.dot.current{background:#ffbd43}
+.result{text-align:center}
+.trophy{font-size:5rem;animation:float 2.5s ease-in-out infinite}
+.result h2{font-size:clamp(1.8rem,4vw,2.6rem);margin:5px 0}
+.score-big{font-size:3.6rem;color:var(--blue);font-weight:950;line-height:1.15}
+.result-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:24px 0}
+.stat{background:#f2f6ff;border-radius:16px;padding:16px}
+.stat strong{display:block;font-size:1.4rem}
+.certificate-note{background:#fff6da;border:1px solid #ffe29a;border-radius:15px;padding:14px;margin:18px auto;max-width:650px;text-align:left}
+footer{text-align:center;color:#66738d;font-size:.85rem;padding:24px 0 10px}
+@media(max-width:720px){.hero{grid-template-columns:1fr}.hero-art{order:-1;padding:12px;font-size:5rem}.features{grid-template-columns:1fr}.form-grid{grid-template-columns:1fr}.result-grid{grid-template-columns:1fr}.wrap{padding:12px}.panel{border-radius:20px}.top-actions button{padding:10px 12px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="brand"><div class="logo" aria-hidden="true">★</div><div><h1>Petualangan Norma</h1><p class="subtitle">Pendidikan Pancasila • Kelas 3 SD</p></div></div>
+  <div class="top-actions"><button class="secondary" id="soundToggle" type="button" aria-pressed="true">🔊 Suara: Aktif</button></div>
+</header>
+
+<main>
+<section class="panel" id="intro">
+  <div class="hero">
+    <div>
+      <span class="level-chip">🎯 Misi 5 Level</span>
+      <h2>Jadi Jagoan Norma dan Aturan!</h2>
+      <p>Yuk, jelajahi situasi sehari-hari, pilih tindakan yang tepat, dan buktikan bahwa kamu bisa bersikap jujur, tertib, sopan, serta bertanggung jawab. Setiap jawaban akan mendapat umpan balik.</p>
+      <div class="form-grid">
+        <div class="field"><label for="studentName">Nama siswa</label><input id="studentName" maxlength="70" autocomplete="name" placeholder="Contoh: Budi Santoso" required></div>
+        <div class="field"><label for="studentClass">Kelas</label><input id="studentClass" maxlength="30" value="3 SD" placeholder="Contoh: 3A" required></div>
+      </div>
+      <button class="primary" id="startBtn" type="button">Mulai Petualangan 🚀</button>
+      <p class="hint">Selesaikan semua 5 level untuk membuka sertifikat digital yang dapat diunduh.</p>
+    </div>
+    <div class="hero-art" aria-hidden="true">🧭📚</div>
+  </div>
+  <div class="features">
+    <div class="feature"><span>🧠</span><b>Berpikir Cermat</b><small>Analisis masalah dan pilih solusi terbaik.</small></div>
+    <div class="feature"><span>⭐</span><b>Skor Otomatis</b><small>Setiap jawaban benar menambah nilai.</small></div>
+    <div class="feature"><span>🏅</span><b>Sertifikat Digital</b><small>Unduh sertifikat setelah seluruh misi selesai.</small></div>
+  </div>
+</section>
+
+<section class="panel hidden" id="game" aria-live="polite">
+  <div class="game-head"><span class="level-chip" id="levelChip">Level 1 dari 5</span><span class="score-chip">⭐ Skor sementara: <span id="scoreNow">0</span></span></div>
+  <div class="progress" aria-label="Kemajuan permainan"><div id="progressBar"></div></div>
+  <h2 class="level-title" id="levelTitle">Level 1: Kenali Norma</h2>
+  <p class="question-meta" id="questionMeta">Pertanyaan 1 dari 3</p>
+  <p class="question" id="questionText"></p>
+  <div class="options" id="options"></div>
+  <div class="feedback hidden" id="feedback" role="status"></div>
+  <div class="game-footer"><span class="motivation" id="motivation">Kamu pasti bisa! 💪</span><button class="primary hidden" id="nextBtn" type="button">Lanjutkan →</button></div>
+  <div class="level-dots" id="levelDots" aria-label="Progres level"></div>
+</section>
+
+<section class="panel hidden result" id="result">
+  <div class="trophy" aria-hidden="true">🏆</div>
+  <span class="level-chip">Misi selesai!</span>
+  <h2>Hebat sekali, <span id="resultName"></span>!</h2>
+  <p>Kamu telah menyelesaikan semua level Petualangan Norma.</p>
+  <div class="score-big"><span id="finalScore">0</span><span style="font-size:1.3rem">/100</span></div>
+  <p id="resultMessage">Terus lakukan kebiasaan baik setiap hari!</p>
+  <div class="result-grid">
+    <div class="stat"><strong id="correctCount">0</strong><span>Jawaban benar</span></div>
+    <div class="stat"><strong>5/5</strong><span>Level selesai</span></div>
+    <div class="stat"><strong id="finishDate">—</strong><span>Tanggal selesai</span></div>
+  </div>
+  <div class="certificate-note"><b>🎓 Sertifikat digital siap!</b><br>Unduh sertifikat yang memuat nama, kelas, skor akhir, dan tanggal penyelesaian. Kamu juga bisa mencetaknya setelah dibuka.</div>
+  <div style="display:flex;justify-content:center;gap:10px;flex-wrap:wrap">
+    <button class="primary" id="downloadCert" type="button">⬇️ Unduh Sertifikat PNG</button>
+    <button class="secondary" id="printCert" type="button">🖨️ Cetak / Simpan PDF</button>
+    <button class="ghost" id="restartBtn" type="button">↻ Main Lagi</button>
+  </div>
+  <canvas id="certificateCanvas" width="1600" height="1100" class="hidden" aria-hidden="true"></canvas>
+</section>
+</main>
+<footer>Belajar dengan gembira • Berbuat baik setiap hari • Pancasila dalam tindakan 🇮🇩</footer>
+</div>
+<script>
+"use strict";
+const levels = [
+ {title:"Level 1: Mengenal Norma",questions:[
+  {q:"Norma adalah aturan yang membantu kita hidup tertib. Saat bertemu guru di pagi hari, tindakan yang sesuai norma kesopanan adalah ...",o:["Berpura-pura tidak melihat","Menyapa dan memberi salam dengan sopan","Berteriak agar semua orang melihat"],a:1,e:"Menyapa dan memberi salam menunjukkan sikap hormat dan sopan kepada guru."},
+  {q:"Kamu menemukan pensil bagus di lantai kelas dan tidak tahu pemiliknya. Apa tindakan paling tepat?",o:["Menyimpannya karena tidak ada yang melihat","Membuangnya","Menyerahkannya kepada guru agar pemiliknya dapat mencari"],a:2,e:"Mengembalikan barang temuan adalah tindakan jujur dan bertanggung jawab."},
+  {q:"Mengapa kita perlu menaati aturan di sekolah?",o:["Agar semua warga sekolah merasa aman dan kegiatan berjalan tertib","Agar kita bisa menyuruh teman","Supaya tidak perlu belajar"],a:0,e:"Aturan membantu menciptakan lingkungan belajar yang aman, tertib, dan nyaman."}]},
+ {title:"Level 2: Aturan di Rumah",questions:[
+  {q:"Ibu sedang berbicara melalui telepon penting. Kamu ingin meminta bantuan. Apa yang sebaiknya dilakukan?",o:["Berteriak terus sampai ibu menjawab","Menunggu dengan sabar lalu berbicara sopan","Mematikan telepon ibu"],a:1,e:"Menunggu dengan sabar dan berbicara sopan menghargai orang lain."},
+  {q:"Kamu selesai bermain, tetapi mainan berserakan di ruang keluarga. Apa tindakan yang bertanggung jawab?",o:["Membiarkannya agar dibereskan kakak","Menyembunyikan mainan di bawah sofa","Membereskan mainan ke tempat semula"],a:2,e:"Membereskan barang sendiri merupakan bentuk tanggung jawab dan menaati aturan rumah."},
+  {q:"Kamu dan adik sama-sama ingin memakai satu mainan. Solusi terbaik agar adil adalah ...",o:["Bergantian sesuai kesepakatan","Merebutnya lebih dahulu","Tidak mengizinkan adik bermain selamanya"],a:0,e:"Bergantian dengan kesepakatan menghargai hak kedua anak dan menghindari pertengkaran."}]},
+ {title:"Level 3: Tertib di Sekolah",questions:[
+  {q:"Bel masuk sudah berbunyi, tetapi teman mengajak terus bermain. Apa pilihan terbaik?",o:["Ikut bermain karena teman mengajak","Mengajak teman masuk kelas agar tidak terlambat","Bersembunyi di halaman"],a:1,e:"Kamu dapat memberi contoh yang baik dengan segera masuk kelas dan mengajak teman ikut tertib."},
+  {q:"Saat diskusi, pendapat teman berbeda dengan pendapatmu. Sikap yang tepat adalah ...",o:["Mendengarkan dan menyampaikan pendapat dengan santun","Menertawakan pendapatnya","Memotong pembicaraannya"],a:0,e:"Menghargai perbedaan pendapat membuat musyawarah berjalan baik."},
+  {q:"Kamu tidak sengaja menumpahkan air di lantai kelas. Agar teman tidak terpeleset, kamu sebaiknya ...",o:["Pergi diam-diam","Menunggu sampai ada yang jatuh","Memberi tahu guru dan membantu membersihkannya dengan aman"],a:2,e:"Mengakui kejadian dan membantu mengatasi bahaya menunjukkan tanggung jawab."}]},
+ {title:"Level 4: Norma di Masyarakat",questions:[
+  {q:"Di perpustakaan umum, beberapa orang sedang membaca. Kamu ingin berbicara dengan teman. Apa yang tepat?",o:["Berbicara keras dari ujung ruangan","Berbicara pelan agar tidak mengganggu","Memutar musik dengan keras"],a:1,e:"Menjaga suara tetap pelan berarti menghormati hak orang lain untuk membaca."},
+  {q:"Kamu melihat antrean panjang di kantin. Teman mengajakmu menyelak. Apa keputusan terbaik?",o:["Tetap mengantre sesuai urutan","Menyelak karena bersama teman","Meminta teman lain menjaga tempat lalu pergi"],a:0,e:"Mengantre dengan tertib adalah bentuk keadilan dan menghormati hak orang lain."},
+  {q:"Warga sedang bergotong royong membersihkan lingkungan. Kamu masih punya waktu luang. Apa yang bisa kamu lakukan sesuai kemampuan?",o:["Mengotori tempat yang sudah bersih","Mengejek orang yang bekerja","Membantu tugas yang aman, seperti mengumpulkan sampah dengan pendampingan"],a:2,e:"Gotong royong memperkuat kepedulian. Pilih pekerjaan yang aman dan sesuai kemampuan anak."}]},
+ {title:"Level 5: Pemecah Masalah Hebat",questions:[
+  {q:"Saat bermain bola, bola mengenai pot bunga tetangga hingga pecah. Teman mengajakmu pergi tanpa memberi tahu. Apa tindakan paling bertanggung jawab?",o:["Menyalahkan orang lain","Mengakui kejadian, meminta maaf, dan memberi tahu orang dewasa","Diam saja karena tidak sengaja"],a:1,e:"Walaupun tidak sengaja, kita perlu jujur, meminta maaf, dan membantu menyelesaikan masalah."},
+  {q:"Kamu melihat seorang teman diejek karena jawabannya salah. Apa tindakan terbaik?",o:["Ikut tertawa agar dianggap lucu","Merekam lalu menyebarkannya","Menghentikan ejekan dengan sopan dan menyemangati teman"],a:2,e:"Kita harus menghormati teman, mencegah perundungan, dan menciptakan suasana aman."},
+  {q:"Kelas ingin menentukan permainan untuk acara bersama. Ada tiga usul yang berbeda. Cara paling adil untuk mengambil keputusan adalah ...",o:["Bermusyawarah, mendengarkan semua usul, lalu menyepakati pilihan bersama","Memilih usul teman yang paling kuat suaranya","Membiarkan satu orang menentukan tanpa mendengar yang lain"],a:0,e:"Musyawarah memberi kesempatan kepada semua orang untuk didengar dan membantu mencapai kesepakatan bersama."}]}
+];
+let levelIndex=0, questionIndex=0, correct=0, answered=0, soundOn=true, locked=false, studentName="", studentClass="", finalScore=0, completionDate="";
+const $=id=>document.getElementById(id);
+function show(el){el.classList.remove("hidden")}function hide(el){el.classList.add("hidden")}
+function beep(freq=660,duration=.12,type="sine"){if(!soundOn)return;try{const C=window.AudioContext||window.webkitAudioContext;if(!C)return;const ctx=new C(),osc=ctx.createOscillator(),gain=ctx.createGain();osc.type=type;osc.frequency.value=freq;gain.gain.setValueAtTime(.08,ctx.currentTime);gain.gain.exponentialRampToValueAtTime(.001,ctx.currentTime+duration);osc.connect(gain);gain.connect(ctx.destination);osc.start();osc.stop(ctx.currentTime+duration);osc.onended=()=>ctx.close()}catch(e){}}
+$("soundToggle").addEventListener("click",()=>{soundOn=!soundOn;$("soundToggle").textContent=soundOn?"🔊 Suara: Aktif":"🔇 Suara: Mati";$("soundToggle").setAttribute("aria-pressed",String(soundOn));if(soundOn)beep()});
+$("startBtn").addEventListener("click",()=>{
+ const n=$("studentName").value.trim(),c=$("studentClass").value.trim();
+ if(!n||!c){alert("Silakan isi nama siswa dan kelas terlebih dahulu.");(!n?$("studentName"):$("studentClass")).focus();return}
+ studentName=n;studentClass=c;levelIndex=0;questionIndex=0;correct=0;answered=0;locked=false;
+ hide($("intro"));hide($("result"));show($("game"));renderQuestion();beep(520,.12);
+});
+function renderQuestion(){
+ locked=false;const lev=levels[levelIndex],item=lev.questions[questionIndex];
+ $("levelChip").textContent=`Level ${levelIndex+1} dari ${levels.length}`;
+ $("scoreNow").textContent=Math.round(correct/15*100);
+ $("progressBar").style.width=`${(answered/15)*100}%`;
+ $("levelTitle").textContent=lev.title;
+ $("questionMeta").textContent=`Pertanyaan ${questionIndex+1} dari ${lev.questions.length}`;
+ $("questionText").textContent=item.q;
+ $("options").innerHTML="";hide($("feedback"));hide($("nextBtn"));
+ $("motivation").textContent=["Kamu pasti bisa! 💪","Pikirkan pilihan yang paling baik.","Hebat, terus gunakan hati dan pikiranmu!"][questionIndex%3];
+ item.o.forEach((txt,i)=>{const b=document.createElement("button");b.type="button";b.className="option";b.innerHTML=`<span class="letter">${String.fromCharCode(65+i)}</span><span></span>`;b.lastElementChild.textContent=txt;b.addEventListener("click",()=>choose(i,b));$("options").appendChild(b)});
+ $("levelDots").innerHTML=levels.map((l,i)=>`<span class="dot ${i<levelIndex?"done":i===levelIndex?"current":""}" title="Level ${i+1}"></span>`).join("");
+}
+function choose(i,btn){
+ if(locked)return;locked=true;answered++;const item=levels[levelIndex].questions[questionIndex],buttons=[...$("options").querySelectorAll("button")];
+ buttons.forEach((b,j)=>{b.disabled=true;if(j===item.a)b.classList.add("correct")});
+ const f=$("feedback");
+ if(i===item.a){correct++;btn.classList.add("correct");f.className="feedback good";f.innerHTML="✅ <b>Benar sekali!</b> "+item.e+" 🌟";$("motivation").textContent="Luar biasa! Kamu memilih tindakan yang bijak.";beep(820,.16)}
+ else{btn.classList.add("wrong");f.className="feedback bad";f.innerHTML="💡 <b>Belum tepat, tetap semangat!</b> "+item.e; $("motivation").textContent="Kesalahan adalah kesempatan untuk belajar.";beep(240,.2,"triangle")}
+ show(f);$("scoreNow").textContent=Math.round(correct/15*100);$("progressBar").style.width=`${(answered/15)*100}%`;
+ $("nextBtn").textContent=(levelIndex===4&&questionIndex===2)?"Lihat Hasil 🏆":(questionIndex===2?"Lanjut ke Level Berikutnya →":"Soal Berikutnya →");show($("nextBtn"));
+}
+$("nextBtn").addEventListener("click",()=>{
+ if(!locked)return;
+ if(questionIndex<2){questionIndex++}else if(levelIndex<4){levelIndex++;questionIndex=0}else{finishGame();return}
+ renderQuestion();beep(570,.08);
+});
+function formatDate(d){return new Intl.DateTimeFormat("id-ID",{day:"numeric",month:"long",year:"numeric"}).format(d)}
+function finishGame(){
+ finalScore=Math.round(correct/15*100);completionDate=formatDate(new Date());
+ hide($("game"));show($("result"));$("resultName").textContent=studentName;$("finalScore").textContent=finalScore;$("correctCount").textContent=`${correct}/15`;$("finishDate").textContent=completionDate;
+ $("resultMessage").textContent=finalScore>=90?"Luar biasa! Kamu teladan dalam memahami norma dan aturan! 🌟":finalScore>=70?"Bagus! Terus praktikkan sikap tertib, jujur, dan sopan setiap hari! 💪":"Terima kasih sudah berusaha! Coba main lagi dan jadikan setiap soal sebagai pelajaran baru. 🌱";
+ $("progressBar").style.width="100%";beep(880,.25);
+}
+function drawCertificate(){
+ const canvas=$("certificateCanvas"),ctx=canvas.getContext("2d"),w=canvas.width,h=canvas.height;
+ ctx.clearRect(0,0,w,h);ctx.fillStyle="#fffdf6";ctx.fillRect(0,0,w,h);
+ ctx.strokeStyle="#1746a2";ctx.lineWidth=22;ctx.strokeRect(32,32,w-64,h-64);
+ ctx.strokeStyle="#e4b84f";ctx.lineWidth=5;ctx.strokeRect(55,55,w-110,h-110);
+ ctx.textAlign="center";ctx.fillStyle="#1746a2";ctx.font="bold 52px Georgia";ctx.fillText("SERTIFIKAT PENGHARGAAN",w/2,170);
+ ctx.fillStyle="#a07820";ctx.font="bold 30px Arial";ctx.fillText("PETUALANGAN NORMA DAN ATURAN",w/2,225);
+ ctx.fillStyle="#28334b";ctx.font="30px Arial";ctx.fillText("Diberikan kepada:",w/2,330);
+ ctx.fillStyle="#1746a2";ctx.font="bold 64px Georgia";wrapCanvasText(ctx,studentName,w/2,420,1300,75);
+ ctx.strokeStyle="#d7b75c";ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(300,465);ctx.lineTo(1300,465);ctx.stroke();
+ ctx.fillStyle="#28334b";ctx.font="30px Arial";ctx.fillText(`Kelas: ${studentClass}`,w/2,530);
+ ctx.font="28px Arial";ctx.fillText("Telah menyelesaikan seluruh 5 level permainan edukasi",w/2,600);
+ ctx.fillText("Pendidikan Pancasila — Norma dan Aturan dalam Kehidupan Sehari-hari",w/2,650);
+ ctx.fillStyle="#1746a2";ctx.font="bold 40px Arial";ctx.fillText(`SKOR AKHIR: ${finalScore}/100`,w/2,740);
+ ctx.fillStyle="#28334b";ctx.font="27px Arial";ctx.fillText(`Tanggal penyelesaian: ${completionDate}`,w/2,805);
+ ctx.font="italic 26px Georgia";ctx.fillText("Teruslah jujur, tertib, sopan, dan bertanggung jawab!",w/2,890);
+ ctx.font="bold 24px Arial";ctx.fillText("Bintang Norma ⭐",w/2,965);
+}
+function wrapCanvasText(ctx,text,x,y,maxWidth,lineHeight){const words=text.split(" ");let line="",lines=[];for(const word of words){const test=line?line+" "+word:word;if(ctx.measureText(test).width>maxWidth&&line){lines.push(line);line=word}else line=test}if(line)lines.push(line);const start=y-((lines.length-1)*lineHeight)/2;lines.forEach((l,i)=>ctx.fillText(l,x,start+i*lineHeight))}
+$("downloadCert").addEventListener("click",()=>{drawCertificate();const a=document.createElement("a");a.download="Sertifikat-Petualangan-Norma.png";a.href=$("certificateCanvas").toDataURL("image/png");a.click();});
+$("printCert").addEventListener("click",()=>{drawCertificate();const data=$("certificateCanvas").toDataURL("image/png");const win=window.open("","_blank");if(!win){alert("Jendela cetak diblokir. Izinkan pop-up untuk situs ini, lalu coba lagi.");return}win.document.write(`<!doctype html><html><head><title>Sertifikat Petualangan Norma</title><style>body{margin:0;display:grid;place-items:center;min-height:100vh}img{width:100%;max-width:1100px}@page{size:landscape;margin:8mm}</style></head><body><img src="${data}" alt="Sertifikat digital"><script>window.onload=()=>window.print()<\/script></body></html>`);win.document.close();});
+$("restartBtn").addEventListener("click",()=>{hide($("result"));show($("intro"));$("studentName").value=studentName;$("studentClass").value=studentClass;window.scrollTo({top:0,behavior:"smooth"})});
+</script>
+</body>
+</html>
